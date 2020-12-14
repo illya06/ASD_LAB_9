@@ -23,7 +23,7 @@ namespace ASD_LAB_9
             List<int> arr = new List<int>();
             for(int i = 0; i < 10; i++)
             {
-                arr.Add(rnd.Next());
+                arr.Add(rnd.Next(-10, 10));
             }
 
             arr.Sort();
