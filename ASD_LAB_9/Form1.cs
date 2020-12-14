@@ -17,6 +17,27 @@ namespace ASD_LAB_9
             InitializeComponent();
         }
 
+        public void clear()
+        {
+            log.Text = "";
+        }
+
+        public void logOut(string text)
+        {
+            log.Text += text;
+        }
+
+        public void arrToLog(List<int> arr, string title = "")
+        {
+            clear();
+            logOut("\n" + title + "\n");
+            foreach(int i in arr)
+            {
+                logOut(string.Format("{0,4} ", i));
+            }
+            logOut("\n");
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -38,6 +59,7 @@ namespace ASD_LAB_9
                 }
             }
 
+            arrToLog(arr, "INPUT ARRAY : ");
             result.Text = $"{Binary.binSearch(arr.ToArray(), Convert.ToInt32(value.Text), 0, arr.Count - 1)}"; 
         }
     }
