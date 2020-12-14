@@ -16,6 +16,35 @@ namespace ASD_LAB_9
         {
             InitializeComponent();
         }
+        public int binSearch(int[] arr, int val, int left, int right)
+        {
+            if (left > right)
+            {
+                return -1;
+            }
+
+            int mid = (left + right) / 2;
+
+            int[] temp = new int[right - left];
+            for(int i = left; i < right; i++)
+            {
+                temp[i - left] = arr[i];
+            }
+            arrToLog(temp, $"mid INDEX = {mid} el({arr[mid]}) | range ({left}; {right})");
+
+            if (arr[mid] == val)
+            {
+                return mid;
+            }
+            else if (arr[mid] < val)
+            {
+                return binSearch(arr, val, mid + 1, right);
+            }
+            else
+            {
+                return binSearch(arr, val, left, mid - 1);
+            }
+        }
 
         public void clear()
         {
@@ -27,9 +56,8 @@ namespace ASD_LAB_9
             log.Text += text;
         }
 
-        public void arrToLog(List<int> arr, string title = "")
+        public void arrToLog(int[] arr, string title = "")
         {
-            clear();
             logOut("\n" + title + "\n");
             foreach(int i in arr)
             {
@@ -40,6 +68,7 @@ namespace ASD_LAB_9
 
         private void button1_Click(object sender, EventArgs e)
         {
+            clear();
             Random rnd = new Random();
             List<int> arr = new List<int>();
 
@@ -59,8 +88,8 @@ namespace ASD_LAB_9
                 }
             }
 
-            arrToLog(arr, "INPUT ARRAY : ");
-            result.Text = $"{Binary.binSearch(arr.ToArray(), Convert.ToInt32(value.Text), 0, arr.Count - 1)}"; 
+            arrToLog(arr.ToArray(), "INPUT ARRAY : ");
+            result.Text = $"{binSearch(arr.ToArray(), Convert.ToInt32(value.Text), 0, arr.Count)}"; 
         }
     }
 }
